@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BASE_URL } from '../App'
+import { BASE_URL } from '../App';
 
 const initialState = {
   login: {
     accessToken: null,
     userId: 0,
-    name: null,
+    userName: null,
     errorMessage: null,
   },
 };
@@ -25,8 +25,8 @@ export const user = createSlice({
       state.login.userId = userId;
     },
     setUserName: (state, action) => {
-      const { name } = action.payload;
-      state.login.name = name;
+      const { userName } = action.payload;
+      state.login.userName = userName;
     },
     setErrorMessage: (state, action) => {
       const { errorMessage } = action.payload;
@@ -36,7 +36,7 @@ export const user = createSlice({
 });
 
 export const signup = (name, email, password) => {
-  const SIGNUP_URL = `${BASE_URL}/users`;
+  const SIGNUP_URL = `${BASE_URL}/users/create`;
   return (dispatch) => {
     fetch(SIGNUP_URL, {
       method: 'POST',
@@ -44,16 +44,12 @@ export const signup = (name, email, password) => {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
+        if (!res.ok) {
+          throw 'Unable to create user. Please try again.';
         }
-        throw 'Unable to create user. Please try again.';
-      })
-      .then((res) => {
-        res.json();
       })
       .catch((err) => {
-        dispatch(user.actions.logout());
+        logout();
         dispatch(user.actions.setErrorMessage({ errorMessage: err }));
       });
   };
@@ -74,12 +70,37 @@ export const signin = (email, password) => {
         throw 'Unable to sign in. Please check that your username and password are correct.';
       })
       .then((json) => {
+        console.log(json)
         dispatch(user.actions.setAccessToken({accessToken: json.accessToken,}));
         dispatch(user.actions.setUserId({ userId: json.userId }));
-        dispatch(user.actions.setUserName({ userName: json.name }));
+        dispatch(user.actions.setUserName({ userName: json.userName }));
       })
       .catch((err) => {
-        dispatch(user.actions.logout());
+        logout();
+        dispatch(user.actions.setErrorMessage({ errorMessage: err }));
+      });
+  };
+};
+
+export const getUserInfo = () => {
+  const USER_URL = `${BASE_URL}/users`;
+  return (dispatch, getState) => {
+    const accessToken = getState().user.login.accessToken;
+    const userId = getState().user.login.userID;
+    fetch(`${USER_URL}/${userId}`, {
+      method: 'GET', 
+      headers: { Authorization: accessToken },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json;
+        } 
+        throw 'Could not get information. Make sure you are logged in and try again.';
+      })
+      .then((json) => {
+        dispatch()
+      })
+      .catch((err) => {
         dispatch(user.actions.setErrorMessage({ errorMessage: err }));
       });
   };
@@ -87,7 +108,6 @@ export const signin = (email, password) => {
 
 export const logout = () => {
   return (dispatch) => {
-    dispatch(user.actions.setSecretMessage({ secretMessage: null }));
     dispatch(user.actions.setErrorMessage({ errorMessage: null }));
     dispatch(user.actions.setAccessToken({ accessToken: null }));
     dispatch(user.actions.setUserId({ userId: 0 }));

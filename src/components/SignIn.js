@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signin } from '../reducers/user';
 
 export const SignIn = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignin = (event) => {
     event.preventDefault();
     dispatch(signin(email, password));
+    history.push('/profile');
+    setEmail('');
+    setPassword('');
   };
 
   return (

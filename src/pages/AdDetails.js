@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import moment from 'moment';
+import { BASE_URL } from '../App';
+import { DetailHolder } from '../lib/DetailsStyilng';
 
-export const MoviesDetails = () => {
-  const {id} = useParams();
-  const Ad_URL = ``;
-  const history = useHistory();
+export const AdDetails = () => {
+  const { _id } = useParams();
+  const AD_URL = `${BASE_URL}/posts?id=${_id}`;
   const [ad, setAd] = useState();
 
   useEffect(() => {
     fetch(AD_URL)
-      .then(res => {
-        setStatusCode(res.status);
-        return res.json();
-      })
-      .then(json => {setMovie(json)})
-  }, [AD_URL, id]);
+      .then(res => res.json())
+      .then(json => setAd(json))
+  }, [AD_URL, _id]);
 
-  useEffect(() => {
-    if (statusCode !== 200) {
-      history.push('/ads')
-    }
-  }, [statusCode, history]);
-
-  if(!movie) {
+  if(!ad) {
     return <></>;
   };
 
   return (
-    <section>
-      <img src='' alt='' />
-      <h2>{title}</h2>
-    </section>
+    <DetailHolder>
+      <h1>{ad.title}</h1>
+      <h2>{ad.price} kr</h2>
+      <h3>{ad.info}</h3>
+      <h4>Sold by: <Link to={`/seller/${ad.sellerId}`}> {ad.sellerName}</Link></h4>
+      <h4>{moment(ad.createdAt).fromNow()}</h4>
+    </DetailHolder>
   );
 }
