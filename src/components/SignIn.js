@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signin } from '../reducers/user';
+import { TextInput } from '../lib/FormsInputs';
+import { SignButton } from '../lib/Buttons'
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -18,31 +21,44 @@ export const SignIn = () => {
   };
 
   return (
-    <div> 
+    <Holder> 
       <form onSubmit={handleSignin}>
-          <label>
-            <input
-              type='email'
-              placeholder='Email'
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
-          </label>
-          <label>
-            <input
-              type='password'
-              placeholder='Password'
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              minLength='6'
-              required
-            />
-          </label>
-          <label>
-            <button type='submit'>Sign in</button>
-          </label>
-        </form>
-    </div>
+        <label>
+          <TextInput
+            type='email'
+            placeholder='Email'
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </label>
+        <label>
+          <TextInput
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            minLength='6'
+            required
+          />
+        </label>
+        <label>
+          <SignButton type='submit'>Sign in</SignButton>
+        </label>
+      </form>
+      <Text>New user?</Text>
+      <Link to='/createaccount'>
+        <SignButton>Create account</SignButton>
+      </Link>
+    </Holder>
   );
 };
+
+const Holder = styled.section`
+  font-size: 20px;
+  text-align: center;
+`;
+const Text = styled.span`
+  margin: 5px 10px;
+  color: gray;
+`;

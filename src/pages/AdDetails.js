@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 import moment from 'moment';
 import { BASE_URL } from '../App';
-import { DetailHolder } from '../lib/DetailsStyilng';
+import { Buttons } from '../lib/Buttons';
 
 export const AdDetails = () => {
   const { _id } = useParams();
@@ -21,11 +22,82 @@ export const AdDetails = () => {
 
   return (
     <DetailHolder>
-      <h1>{ad.title}</h1>
-      <h2>{ad.price} kr</h2>
-      <h3>{ad.info}</h3>
-      <h4>Sold by: <Link to={`/seller/${ad.sellerId}`}> {ad.sellerName}</Link></h4>
-      <h4>{moment(ad.createdAt).fromNow()}</h4>
+      <Image src={ad.image} alt='Product image' />
+      <InfoHolder>
+        <div>
+          <Title>{ad.title}</Title>
+          <SubTitles>{ad.price} kr</SubTitles>
+          <SubTitles>{ad.info}</SubTitles>
+        </div>  
+        <TextHolder>
+          <div>
+            <Text><TextBold>Pickup location:</TextBold> {ad.location}</Text>
+            <Text><TextBold>Shipping:</TextBold> {ad.delivery}</Text>
+          </div>
+          <div>
+            <Text><TextBold>Posted:</TextBold> {moment(ad.createdAt).fromNow()}</Text>
+            <Text><TextBold>Sold by:</TextBold> {ad.sellerName}</Text>
+            <Text>
+              <Link to={`/seller/${ad.sellerId}`}>
+                Click to see more from this seller {'>'}
+              </Link>
+            </Text>
+          </div>
+        </TextHolder>
+        <Buttons>Send a buy request</Buttons>
+      </InfoHolder>
     </DetailHolder>
   );
 }
+
+const DetailHolder = styled.section`
+  margin: 50px;
+  display: flex;
+`;
+const Image = styled.img`
+  width: 500px;
+`;
+const InfoHolder = styled.section`
+  width: 100%;
+  background-color: #f1f1f1;
+  margin: 0px 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+const Title = styled.h1`
+  font-size: 30px;
+  color: #1fab89;
+  margin: 0px; 
+`;
+const SubTitles = styled.h2`
+  font-size: 20px; 
+  font-weight: bold;
+  margin: 0px;
+`
+const Text = styled.p`
+  font-size: 18px; 
+  margin: 0px;
+`;
+const TextBold = styled.span`
+  font-size: 18px; 
+  font-weight: bold;
+  margin: 0px;
+`;
+const TextHolder = styled.section`
+  display: flex; 
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 20px 0px 10px 0px;
+
+  a, &:visited  {
+    text-decoration: none;
+    color: black;
+  }
+  a:hover{
+    text-decoration: underline;
+    color: #1fab89;
+    cursor: pointer;
+  }
+`;

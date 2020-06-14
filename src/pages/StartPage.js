@@ -1,27 +1,46 @@
 import React from 'react';
+import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import { Holder, TextHolder, ButtonHolder } from '../lib/StartpageStyling';
+import { Buttons } from '../lib/Buttons';
 
 export const StartPage = () => {
   return (
     <Holder>
+      <Image src={process.env.PUBLIC_URL + '/assets/recycle.jpg'} alt='Trift shopping' />
       <TextHolder>
-        <h1>Welcome</h1>
-        <p>
+        <Welcome>WELCOME TO THRIFTY</Welcome>
+        <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </TextHolder>
-      <ButtonHolder>
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Text>
         <Link to='/posts'>
-          <button>Start browsing</button>
+          <Buttons>START THRIFTING</Buttons>
         </Link>
-      </ButtonHolder>
+      </TextHolder>
     </Holder>
   );
 }
+
+const Holder = styled.section`
+  padding: 40px;
+  display: flex;
+  justify-content: space-around;
+  color: #62d2a2;
+`;
+const Image = styled.img`
+  max-width: 40%;
+`;
+const TextHolder = styled.div`
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+const Welcome= styled.h1`
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0px;
+`;
+const Text = styled.p`
+  font-size: 30px;
+`

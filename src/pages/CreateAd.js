@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { user } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '../App';
@@ -17,25 +17,36 @@ export const CreateAd = () => {
   const [location, setLocation] = useState('');
   const [delivery, setDelivery] = useState('');
   const [category, setCategory] = useState('');
+  const fileInput = useRef();
 
 
   const submitAd = (event) => {
     event.preventDefault();
+    const seller = userId;
+    const formData = new FormData();
+    formData.append('image', fileInput.current.files[0]);
+    formData.append('title', title);
+    formData.append('info', info);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('location', location);
+    formData.append('delivery', delivery);
+    formData.append('seller', seller);
+
     fetch(CREATE_URL, {
       method: 'POST',
-      headers: { Authorization: accessToken, 'Content-Type': 'application/json'},
-      body: JSON.stringify({ title, info, price, category, location, delivery, seller: userId,  }),
+      headers: { Authorization: accessToken },
+      body: formData,
     })
       .then((res) => {
         if (res.ok) { return res.json }
-        throw 'Could not create ad. Please try again.';
+        throw new Error('Could not create ad. Please try again.');
       })
       .then((json) => {
-        console.log(json)
-        history.push(`/posts/${json._id}`)
+        history.push(`/posts/${json}`)
       })
       .catch((err) => {
-        dispatch(user.actions.setErrorMessage({ errorMessage: err }));
+        dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
       });
   };
 
@@ -78,31 +89,39 @@ export const CreateAd = () => {
               required
             />
           </label>
-          <label for='delivery'>Choose a delivery option:</label>
+          <label>Choose a delivery option:</label>
           <label>
             <input
               type='radio'
-              id='shipping'
               name='delivery'
-              value={delivery}
+              value='Product can be shipped'
               onChange={(event) => setDelivery(event.target.value)}
-              checked
+              checked={delivery === 'Product can be shipped'}
             />
-            <label for='shipping'>Product can be shipped</label>
+            Product can be shipped
+          </label>
+          <label>
             <input
               type='radio'
-              id='pickup'
               name='delivery'
-              value={delivery}
+              value='Only pickup, no shipping'
               onChange={(event) => setDelivery(event.target.value)}
+              checked={delivery === 'Only pickup, no shipping'}
             />
-            <label for='pickup'>Only pickup, no shipping</label>
+            Only pickup, no shipping
+          </label>
+          <label>
+            <input 
+              type="file" 
+              ref={fileInput} 
+            />
           </label>
           <label>
             <select 
               value={category}
               onChange={event => setCategory(event.target.value)}
             >
+              <option value=''>Choose a category</option>
               <option value='clothes'>Clothes</option>
               <option value='shoes'>Shoes</option>
               <option value='furniture'>Furniture</option>
@@ -124,5 +143,5 @@ export const CreateAd = () => {
 const Holder = styled.section`
   margin: 50px 100px;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 `

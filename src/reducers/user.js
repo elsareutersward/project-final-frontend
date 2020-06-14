@@ -44,13 +44,20 @@ export const signup = (name, email, password) => {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => {
-        if (!res.ok) {
-          throw 'Unable to create user. Please try again.';
+        if (res.ok) {
+          return res.json();
         }
+        throw new Error ('Unable to create user. Please try again.');
+      })
+      .then((json) => {
+        console.log(json)
+        dispatch(user.actions.setAccessToken({accessToken: json.accessToken,}));
+        dispatch(user.actions.setUserId({ userId: json.userId }));
+        dispatch(user.actions.setUserName({ userName: json.userName }));
       })
       .catch((err) => {
         logout();
-        dispatch(user.actions.setErrorMessage({ errorMessage: err }));
+        dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
       });
   };
 };
@@ -67,7 +74,7 @@ export const signin = (email, password) => {
         if (res.ok) {
           return res.json();
         }
-        throw 'Unable to sign in. Please check that your username and password are correct.';
+        throw new Error ('Unable to sign in. Please check that your username and password are correct.');
       })
       .then((json) => {
         console.log(json)
@@ -77,7 +84,7 @@ export const signin = (email, password) => {
       })
       .catch((err) => {
         logout();
-        dispatch(user.actions.setErrorMessage({ errorMessage: err }));
+        dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
       });
   };
 };
@@ -95,13 +102,13 @@ export const getUserInfo = () => {
         if (res.ok) {
           return res.json;
         } 
-        throw 'Could not get information. Make sure you are logged in and try again.';
+        throw new Error ('Could not get information. Make sure you are logged in and try again.');
       })
       .then((json) => {
         dispatch()
       })
       .catch((err) => {
-        dispatch(user.actions.setErrorMessage({ errorMessage: err }));
+        dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
       });
   };
 };

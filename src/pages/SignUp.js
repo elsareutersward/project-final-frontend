@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { signup } from '../reducers/user';
+import { Form, TextInput } from '../lib/FormsInputs';
+import { SignButton } from '../lib/Buttons';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,13 +15,16 @@ export const SignUp = () => {
   const handleSignup = (event) => {
     event.preventDefault();
     dispatch(signup(name, email, password));
+    history.push('/profile');
+    setEmail('');
+    setPassword('');
   };
 
   return (
     <div> 
-      <form onSubmit={handleSignup}>
+      <Form onSubmit={handleSignup}>
           <label>
-            <input
+            <TextInput
               type='text'
               placeholder='User name'
               value={name}
@@ -27,7 +34,7 @@ export const SignUp = () => {
             />
           </label>
           <label>
-            <input
+            <TextInput
               type='email'
               placeholder='Email'
               value={email}
@@ -36,7 +43,7 @@ export const SignUp = () => {
             />
           </label>
           <label>
-            <input
+            <TextInput
               type='password'
               placeholder='Password'
               value={password}
@@ -46,9 +53,9 @@ export const SignUp = () => {
             />
           </label>
           <label>
-            <button type='submit'>Sign up</button>
+            <SignButton type='submit'>Sign up</SignButton>
           </label>
-        </form>
+        </Form>
     </div>
   );
 };

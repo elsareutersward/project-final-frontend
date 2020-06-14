@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BASE_URL } from '../App'
+import styled from 'styled-components';
 import { AdCard } from '../components/AdCard'
-import { CardHolder } from '../lib/CardStyling';
 
 export const AdsList = ({ ADS_URL }) => {
   const [ ads, setAds ] = useState([]);
@@ -35,3 +34,10 @@ export const AdsList = ({ ADS_URL }) => {
     </section>
   );
 }
+
+const CardHolder = styled.section`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`
