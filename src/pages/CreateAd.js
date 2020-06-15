@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
 import { user } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '../App';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import { Form, TextInput, TextAreaInput, RadioInput, Dropdown } from '../lib/FormsInputs';
+import { SignButton } from '../lib/Buttons';
 
 export const CreateAd = () => {
   const CREATE_URL = `${BASE_URL}/posts`;
@@ -51,76 +53,88 @@ export const CreateAd = () => {
   };
 
   return (
-    <form onSubmit={submitAd}>
-      <Holder> 
+    <Form onSubmit={submitAd} height={'auto'} width={'60%'} font={'19px'}>
+      <Title>Fill in the form below to create a post: </Title>
+      <FormContentHolder> 
+        <SectionDevider>
           <label>
-            <input
+            <TextInput 
+              border={'#f1f1f1 3px solid'} 
+              backgroundColor={'#f1f1f1'}
               type='text'
               placeholder='Title'
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               minLength='5'
               required
-            />
+              />
           </label>
           <label>
-            <textarea
+            <TextAreaInput
               placeholder='Info'
               value={info}
               onChange={(event) => setInfo(event.target.value)}
               required
-            />
+              />
           </label>
           <label>
-            <input
+            <TextInput
+              border={'#f1f1f1 3px solid'} 
+              backgroundColor={'#f1f1f1'}
               type='Number'
               placeholder='Price'
               value={price}
               onChange={(event) => setPrice(event.target.value)}
               required
-            />
+              />
+          </label>
+        </SectionDevider>
+        <SectionDevider>
+          <label>
+            <TextInput 
+              border={'none'}
+              borderBottom={'none'} 
+              type="file" 
+              ref={fileInput} 
+              />
           </label>
           <label>
-            <input
+            <TextInput
+              border={'#f1f1f1 3px solid'} 
+              backgroundColor={'#f1f1f1'}
               type='String'
               placeholder='Location'
               value={location}
               onChange={(event) => setLocation(event.target.value)}
               required
-            />
+              />
           </label>
-          <label>Choose a delivery option:</label>
+          <Text>Choose a delivery option:</Text>
           <label>
-            <input
+            <RadioInput
               type='radio'
               name='delivery'
               value='Product can be shipped'
               onChange={(event) => setDelivery(event.target.value)}
               checked={delivery === 'Product can be shipped'}
-            />
+              />
             Product can be shipped
           </label>
           <label>
-            <input
+            <RadioInput
               type='radio'
               name='delivery'
               value='Only pickup, no shipping'
               onChange={(event) => setDelivery(event.target.value)}
               checked={delivery === 'Only pickup, no shipping'}
-            />
+              />
             Only pickup, no shipping
           </label>
           <label>
-            <input 
-              type="file" 
-              ref={fileInput} 
-            />
-          </label>
-          <label>
-            <select 
+            <Dropdown 
               value={category}
               onChange={event => setCategory(event.target.value)}
-            >
+              >
               <option value=''>Choose a category</option>
               <option value='clothes'>Clothes</option>
               <option value='shoes'>Shoes</option>
@@ -130,18 +144,28 @@ export const CreateAd = () => {
               <option value='books'>Books</option>
               <option value='toys'>Toys</option>
               <option value='sport'>Sport gear</option>
-            </select>
+            </Dropdown>
           </label>
-          <label>
-            <button type='submit'>Create ad</button>
-          </label>
-        </Holder>
-      </form>
+        </SectionDevider>
+      </FormContentHolder>
+      <SignButton type='submit'>Create ad</SignButton>
+    </Form>
   );
 };
 
-const Holder = styled.section`
-  margin: 50px 100px;
+const Title = styled.h1`
+  font-size: 30px;
+  font-weight: lighter;
+`;
+const FormContentHolder = styled.section`
+  display: flex;
+`;
+const SectionDevider = styled.div`
   display: flex;
   flex-direction: column;
-`
+  margin: 20px;
+`;
+const Text = styled.label`
+  margin-left: 10px;
+  font-size: 20px;
+`;

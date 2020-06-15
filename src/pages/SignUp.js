@@ -16,15 +16,19 @@ export const SignUp = () => {
     event.preventDefault();
     dispatch(signup(name, email, password));
     history.push('/profile');
+    setName('');
     setEmail('');
     setPassword('');
   };
 
   return (
     <div> 
-      <Form onSubmit={handleSignup}>
+      <Form onSubmit={handleSignup} height={'300px'} width={'30%'} font={'24px'}>
           <label>
             <TextInput
+              border={'none'}
+              borderBottom={'#f1f1f1 3px solid'} 
+              backgroundColor={'#f5e1da'}
               type='text'
               placeholder='User name'
               value={name}
@@ -35,6 +39,9 @@ export const SignUp = () => {
           </label>
           <label>
             <TextInput
+              border={'none'}
+              borderBottom={'#f1f1f1 3px solid'} 
+              backgroundColor={'#f5e1da'}
               type='email'
               placeholder='Email'
               value={email}
@@ -44,6 +51,9 @@ export const SignUp = () => {
           </label>
           <label>
             <TextInput
+              border={'none'}
+              borderBottom={'#f1f1f1 3px solid'} 
+              backgroundColor={'#f5e1da'}
               type='password'
               placeholder='Password'
               value={password}

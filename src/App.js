@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { user } from './reducers/user';
 import { createStore, combineReducers } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
@@ -41,7 +42,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <main>
+        <Main>
           <Navbar />
           <Switch>
             <Route path='/' exact>
@@ -70,8 +71,16 @@ export const App = () => {
             </Route>
           </Switch>
           <Footer />
-        </main>
+        </Main>
       </BrowserRouter>
     </Provider>
   )
 }
+
+const Main = styled.main`
+  min-height: 100vh;
+ overflow: hidden;
+ display: block;
+ position: relative;
+ padding-bottom: 50px;
+`

@@ -6,6 +6,7 @@ import Tooltip from 'react-tooltip-lite';
 import '../lib/tooltip.css';
 import { logout } from '../reducers/user';
 import { SignIn } from '../components/SignIn';
+import { LightButton } from '../lib/Buttons';
 
 export const Navbar = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export const Navbar = () => {
         <Text>The thriftiness archive</Text>
       </div>
       {!accessToken ? 
-        <SigninHolder>
+        <ContentHolder>
           <Text>
             <Link to='/'>Home</Link>
           </Text>
@@ -35,14 +36,22 @@ export const Navbar = () => {
           <Tooltip content={<SignIn />} direction='under'>
            <Text>Log in</Text>
           </Tooltip>
-        </SigninHolder>
+        </ContentHolder>
       :
-        <SigninHolder>
-          <Link to='/profile'>
-            <h1>{`Welcome ${userName}`}</h1>
-          </Link>
-          <button onClick={() => handleLogout()}>Log out</button>
-        </SigninHolder>
+        <LoggedInHolder>
+          <WelcomeText>{`Welcome ${userName}`}</WelcomeText>
+          <ContentHolder>
+            <Link to='/profile'>
+              <Text>My profile</Text>
+            </Link>
+            <Link to='/posts'>
+              <Text>Thrift</Text>
+            </Link>
+            <LightButton onClick={() => handleLogout()}>
+              Log out
+            </LightButton>
+          </ContentHolder>
+        </LoggedInHolder>  
       }
     </NavbarHolder>
   )
@@ -51,7 +60,7 @@ export const Navbar = () => {
 const NavbarHolder = styled.section`
   background-color: #62d2a2;
   color: #d7fbe8;
-  height: 180px;
+  height: 200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -63,15 +72,26 @@ const NavbarHolder = styled.section`
     color: #d7fbe8;
   }
 `;
-const SigninHolder = styled.div`
+const ContentHolder = styled.div`
   display: flex;
-  align-self: flex-end;
 `;
 const SiteName = styled.h1`
   font-size: 80px;
   margin: 0px 30px;
 `;
 const Text = styled.h2`
-  font-size: 30px;
+  font-size: 26px;
   margin: 0px 30px;
 `;
+const WelcomeText = styled.h2`
+  font-size: 30px;
+  font-weight: lighter;
+  margin: 30px;
+`;
+const LoggedInHolder = styled.section`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+`

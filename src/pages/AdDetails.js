@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 import moment from 'moment';
 import { BASE_URL } from '../App';
-import { Buttons } from '../lib/Buttons';
+import { DarkButton, DeleteButton } from '../lib/Buttons';
 
 export const AdDetails = () => {
   const { _id } = useParams();
@@ -24,11 +24,14 @@ export const AdDetails = () => {
     <DetailHolder>
       <Image src={ad.image} alt='Product image' />
       <InfoHolder>
-        <div>
-          <Title>{ad.title}</Title>
-          <SubTitles>{ad.price} kr</SubTitles>
-          <SubTitles>{ad.info}</SubTitles>
-        </div>  
+        <TitleHolder>
+          <div>
+            <Title>{ad.title}</Title>
+            <SubTitles>{ad.price} kr</SubTitles>
+            <SubTitles>{ad.info}</SubTitles>
+          </div>
+          <DeleteButton>🗑</DeleteButton>
+        </TitleHolder>  
         <TextHolder>
           <div>
             <Text><TextBold>Pickup location:</TextBold> {ad.location}</Text>
@@ -44,7 +47,9 @@ export const AdDetails = () => {
             </Text>
           </div>
         </TextHolder>
-        <Buttons>Send a buy request</Buttons>
+        <DarkButton backgroundColor={'#62d2a2'}>
+          Send a buy request
+        </DarkButton>
       </InfoHolder>
     </DetailHolder>
   );
@@ -56,6 +61,10 @@ const DetailHolder = styled.section`
 `;
 const Image = styled.img`
   width: 500px;
+`;
+const TitleHolder = styled.section`
+  display: flex;
+  justify-content: space-between;
 `;
 const InfoHolder = styled.section`
   width: 100%;

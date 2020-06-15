@@ -16,11 +16,11 @@ export const SignButton = styled.button`
   margin: 10px 5px;
   
   &:hover {
-    font-weight: bold;
+    
   }
 `
-export const Buttons = styled.button`
-  background-color: #62d2a2;
+export const DarkButton = styled.button`
+  background-color: ${props => props.backgroundColor};
   border-radius: 10px;
   border: none;
   padding: 10px 15px;
@@ -29,6 +29,34 @@ export const Buttons = styled.button`
   cursor: pointer;
 
   &:hover {
-    font-weight: bold;
+   
+  }
+`
+export const LightButton = styled.button`
+  background-color: #d7fbe8;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 15px;
+  margin: 0px 30px;
+  color: #62d2a2;
+  font-size: 26px;
+  cursor: pointer;
+
+  &:hover {
+    
+  }
+`
+export const DeleteButton = styled.button`
+  background-color: #e23e57;
+  border-radius: 10px;
+  border: none;
+  color: #FFFFFF;
+  font-size: 26px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+
+  &:hover {
+    
   }
 `

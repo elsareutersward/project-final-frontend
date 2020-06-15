@@ -12,4 +12,6 @@ code {
     monospace;
 }
 
-/* Lägg till block-grejen */
+* {
+  box-sizing: border-box;
+ }

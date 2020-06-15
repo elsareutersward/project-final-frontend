@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import { Buttons } from '../lib/Buttons';
+import { DarkButton } from '../lib/Buttons';
 
 export const StartPage = () => {
   return (
@@ -14,7 +14,9 @@ export const StartPage = () => {
           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Text>
         <Link to='/posts'>
-          <Buttons>START THRIFTING</Buttons>
+          <DarkButton backgroundColor={'#62d2a2'}>
+            START THRIFTING
+          </DarkButton>
         </Link>
       </TextHolder>
     </Holder>
@@ -25,7 +27,7 @@ const Holder = styled.section`
   padding: 40px;
   display: flex;
   justify-content: space-around;
-  color: #62d2a2;
+  color: #40a798;
 `;
 const Image = styled.img`
   max-width: 40%;

@@ -9,14 +9,27 @@ export const Profile = () => {
   const id = useSelector((store) => store.user.login.userId);
   
   return (
-    <ProfileHolder>
-      <Link to='/createAd'>Create a new ad</Link>
-      <Link to='/chat'>Message board</Link>
+    <section>
+      <ProfileNavbar>
+        <Link to='/createAd'>Create new post</Link>
+        <Link to='/chat'>Private messages</Link>
+        <Link to='/chat'>Message board</Link>
+      </ProfileNavbar>
       <AdsList ADS_URL={`${BASE_URL}/posts?userId=${id}`}/>
-    </ProfileHolder>
+    </section>
   );
 };
 
-const ProfileHolder = styled.section`
-  margin: 50px 100px;
+const ProfileNavbar = styled.section`
+  background-color: #d7fbe8;
+  padding: 20px 40px; 
+
+  a, :visited {
+    text-decoration: none;
+    font-size: 20px; 
+    color: #1fab89;
+    margin: 0px 20px;
+  }
 `
+
+

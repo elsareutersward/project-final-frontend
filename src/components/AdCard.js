@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
  
-export const AdCard = ({ id, image, title, price, location, delivery }) => {
+export const AdCard = ({ _id, imageUrl, title, price, location, delivery }) => {
   return (
     <CardContainer>
-      <Link to={`/posts/${id}`}>
-        <Image src={image} alt='Product image' />
+      <Link to={`/posts/${_id}`}>
+        <Image src={imageUrl} alt='Product image' />
         <AdTitle>{title}</AdTitle>
         <TextBold>{price} kr</TextBold>
         <TextHolder>
@@ -24,12 +24,14 @@ const CardContainer = styled.div`
   padding-bottom: 20px;
   background-color: #f1f1f1;
   opacity: 80%;
+  filter: grayscale(40%);
 
   a, &:visited {
     text-decoration: none;
   }
   &:hover {
     opacity: 100%;
+    filter: grayscale(0%);
   }
 `;
 const Image = styled.img`
