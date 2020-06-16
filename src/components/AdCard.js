@@ -28,6 +28,7 @@ const CardContainer = styled.div`
 
   a, &:visited {
     text-decoration: none;
+    color: black;
   }
   &:hover {
     opacity: 100%;

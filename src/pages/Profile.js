@@ -12,7 +12,7 @@ export const Profile = () => {
     <section>
       <ProfileNavbar>
         <Link to='/createAd'>Create new post</Link>
-        <Link to='/chat'>Private messages</Link>
+        <Link to='/conversations'>Private messages</Link>
         <Link to='/chat'>Message board</Link>
       </ProfileNavbar>
       <AdsList ADS_URL={`${BASE_URL}/posts?userId=${id}`}/>

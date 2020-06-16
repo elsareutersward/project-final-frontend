@@ -14,8 +14,9 @@ import { SignUp } from './pages/SignUp';
 import { Profile } from './pages/Profile';
 import { Seller } from './pages/Seller';
 import { CreateAd } from './pages/CreateAd';
-import { Chat } from './pages/Chat';
+import { ConversationsList } from './pages/ConversationsList';
 import { Footer } from './components/Footer';
+import { ConversationsDetails } from './pages/ConversationDetails';
 
 export const BASE_URL = 'http://localhost:8080'
 
@@ -66,8 +67,11 @@ export const App = () => {
             <Route path='/createAd' exact>
               <CreateAd />
             </Route>
-            <Route path='/chat' exact>
-              <Chat />
+            <Route path='/conversations' exact>
+              <ConversationsList />
+            </Route>
+            <Route path='/conversations/:id' exact>
+              <ConversationsDetails />
             </Route>
           </Switch>
           <Footer />

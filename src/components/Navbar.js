@@ -60,7 +60,7 @@ export const Navbar = () => {
 const NavbarHolder = styled.section`
   background-color: #62d2a2;
   color: #d7fbe8;
-  height: 200px;
+  height: 190px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

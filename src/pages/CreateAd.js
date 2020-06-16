@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { user } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
+import swal from 'sweetalert';
 import { BASE_URL } from '../App';
 import { useHistory } from 'react-router-dom';
 import { Form, TextInput, TextAreaInput, RadioInput, Dropdown } from '../lib/FormsInputs';
@@ -45,7 +46,8 @@ export const CreateAd = () => {
         throw new Error('Could not create ad. Please try again.');
       })
       .then((json) => {
-        history.push(`/posts/${json}`)
+        swal("Great work!", "Your post was successfully created!", "success");
+        history.push(`/posts/${json._id}`);
       })
       .catch((err) => {
         dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
@@ -65,7 +67,6 @@ export const CreateAd = () => {
               placeholder='Title'
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              minLength='5'
               required
               />
           </label>
@@ -138,7 +139,6 @@ export const CreateAd = () => {
               <option value=''>Choose a category</option>
               <option value='clothes'>Clothes</option>
               <option value='shoes'>Shoes</option>
-              <option value='furniture'>Furniture</option>
               <option value='furniture'>Furniture</option>
               <option value='home'>Home ware</option>
               <option value='books'>Books</option>
