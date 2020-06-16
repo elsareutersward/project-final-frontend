@@ -1,34 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import swal from 'sweetalert';
-import moment from 'moment';
 import { BASE_URL } from '../App';
-import { DeleteButton } from '../lib/Buttons';
-import { BuyButton } from '../components/BuyButton';
+import { MessageInput } from '../components/MessageInput'
+import { MessageList } from '../components/MessageList';
 
 export const ConversationsDetails = () => {
   const { _id } = useParams();
-  const history = useHistory();
   const CONVERSATION_URL = `${BASE_URL}/conversation/${_id}`;
   const accessToken = useSelector((store) => store.user.login.accessToken);
-  const loggedInUser = useSelector((store) => store.user.login.userId);
-  const [ad, setAd] = useState();
+  const [conversation, setConversation] = useState({ info: {}, messages: [] });
 
   useEffect(() => {
-    fetch(CONVERSATION_URL)
+    fetch(CONVERSATION_URL, {
+      headers: {Authorization: accessToken}
+    })
       .then(res => res.json())
-      .then(json => setAd(json))
-  }, [CONVERSATION_URL, _id]);
+      .then(json => {
+        console.log(json)
+        setConversation(json)})
+  }, [CONVERSATION_URL, accessToken]);
 
-  if(!ad) {
+  if(!conversation) {
     return <></>;
   };
 
   return (
     <section>
-
+      <h1>{conversation.info.name}</h1>
+      <MessageInput conversationId={_id} />
+      {
+        conversation.messages.map(message =>
+        <MessageList {...message} key={message._id} />)
+      }
     </section>
   );
 }

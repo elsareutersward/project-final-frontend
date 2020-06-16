@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { BASE_URL } from '../App';
 import { ErrorMessage } from './ErrorMessage';
+import { useSelector } from 'react-redux';
 
-export const MessageInput = () => {
-  const MESSAGES_URL = BASE_URL;
+export const MessageInput = ({ conversationId }) => {
+  const MESSAGES_URL = `${BASE_URL}/message`;
+  const accessToken = useSelector((store) => store.user.login.accessToken);
+  const userId = useSelector((store) => store.user.login.userId);
   const [message, setMessage] = useState('');
-  const [name, setName] = useState('');
   const [error, setError] = useState(false);
       
   const handleSubmit = event => {
     event.preventDefault();
+
+    let myHeaders = new Headers();
+    myHeaders.append('Authorization', accessToken)
+    myHeaders.append('Content-Type', 'application/json')
+
     fetch(MESSAGES_URL, 
       {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'}, 
-        body: JSON.stringify({message: message, name: name})
+        headers: myHeaders, 
+        body: JSON.stringify({message: message, name: userId, conversation: conversationId })
       })
     .then(response => {
       response.ok ? window.location.reload() : setError(true);
@@ -27,7 +34,6 @@ export const MessageInput = () => {
 
   return (
     <div className='form-container'>
-      <p>What's making you happy right now?</p>
       <form onSubmit={handleSubmit} className='form'>
         <textarea
           placeholder='Type your thought here...'
@@ -37,18 +43,9 @@ export const MessageInput = () => {
         <div className={lengthCheck() ? 'validation-black' : 'validation-red'}>
           {message.length}/140
         </div>
-        <div>
-          <span>Happy thought from:</span>
-          <input
-            type='text'
-            placeholder='Name'
-            className='form-text-name'
-            onChange={event => setName(event.target.value)}
-          />
-        </div>
         {error && <ErrorMessage />}
         <button type='submit'>
-          <p className='heart-button-text'>Send Happy Thought</p>
+          <p>Send</p>
         </button>
       </form>
     </div>

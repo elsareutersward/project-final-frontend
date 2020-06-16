@@ -7,6 +7,7 @@ const initialState = {
     userId: 0,
     userName: null,
     errorMessage: null,
+    loading: false
   },
 };
 
@@ -16,12 +17,10 @@ export const user = createSlice({
   reducers: {
     setAccessToken: (state, action) => {
       const { accessToken } = action.payload;
-      console.log(`accessToken: ${accessToken}`);
       state.login.accessToken = accessToken;
     },
     setUserId: (state, action) => {
       const { userId } = action.payload;
-      console.log(`userId: ${userId}`);
       state.login.userId = userId;
     },
     setUserName: (state, action) => {
@@ -31,6 +30,10 @@ export const user = createSlice({
     setErrorMessage: (state, action) => {
       const { errorMessage } = action.payload;
       state.login.errorMessage = errorMessage;
+    },
+    setLoading: (state, action) => {
+      const { loading } = action.payload;
+      state.login.loading = loading;
     },
   },
 });
@@ -50,7 +53,6 @@ export const signup = (name, email, password) => {
         throw new Error ('Unable to create user. Please try again.');
       })
       .then((json) => {
-        console.log(json)
         dispatch(user.actions.setAccessToken({accessToken: json.accessToken,}));
         dispatch(user.actions.setUserId({ userId: json.userId }));
         dispatch(user.actions.setUserName({ userName: json.userName }));
@@ -65,6 +67,7 @@ export const signup = (name, email, password) => {
 export const signin = (email, password) => {
   const SIGNIN_URL = `${BASE_URL}/sessions`;
   return (dispatch) => {
+    dispatch(user.actions.setLoading({ loading: true }));
     fetch(SIGNIN_URL, {
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -77,10 +80,10 @@ export const signin = (email, password) => {
         throw new Error ('Unable to sign in. Please check that your username and password are correct.');
       })
       .then((json) => {
-        console.log(json)
-        dispatch(user.actions.setAccessToken({accessToken: json.accessToken,}));
-        dispatch(user.actions.setUserId({ userId: json.userId }));
-        dispatch(user.actions.setUserName({ userName: json.userName }));
+          dispatch(user.actions.setAccessToken({accessToken: json.accessToken,}));
+          dispatch(user.actions.setUserId({ userId: json.userId }));
+          dispatch(user.actions.setUserName({ userName: json.userName }));
+          dispatch(user.actions.setLoading({ loading: false }));
       })
       .catch((err) => {
         logout();

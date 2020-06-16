@@ -27,6 +27,7 @@ export const DarkButton = styled.button`
   color: #d7fbe8;
   font-size: 24px;
   cursor: pointer;
+  width: 100%;
 
   &:hover {
    

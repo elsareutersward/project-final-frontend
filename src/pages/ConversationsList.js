@@ -7,14 +7,17 @@ import { useSelector } from 'react-redux';
 export const ConversationsList = () => {
   const userId = useSelector((store) => store.user.login.userId);
   const CONVERSATIONS_URL = `${BASE_URL}/conversations?userId=${userId}`;
+  const accessToken = useSelector((store) => store.user.login.accessToken);
   const [conversations, setConversations] = useState({
     sellerConversations: [], buyerConversations: []});
   
   useEffect(() => {
-    fetch(CONVERSATIONS_URL)
+    fetch(CONVERSATIONS_URL, {
+      headers: {Authorization: accessToken}
+    })
       .then((res) => res.json())
       .then((json) => setConversations(json))
-  }, [CONVERSATIONS_URL]);
+  }, [CONVERSATIONS_URL, accessToken]);
 
   return (
     <ListHolder>

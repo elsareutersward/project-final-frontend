@@ -70,7 +70,7 @@ export const App = () => {
             <Route path='/conversations' exact>
               <ConversationsList />
             </Route>
-            <Route path='/conversations/:id' exact>
+            <Route path='/conversations/:_id' exact>
               <ConversationsDetails />
             </Route>
           </Switch>

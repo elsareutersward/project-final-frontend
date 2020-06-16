@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../reducers/user';
 import { TextInput } from '../lib/FormsInputs';
 import { SignButton } from '../lib/Buttons'
@@ -9,16 +9,21 @@ import { SignButton } from '../lib/Buttons'
 export const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const accessToken = useSelector((store) => store.user.login.accessToken);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignin = (event) => {
     event.preventDefault();
     dispatch(signin(email, password));
-    history.push('/profile');
     setEmail('');
     setPassword('');
   };
+
+  useEffect(() => {
+    console.log('hej', accessToken)
+    accessToken && history.push('/profile')
+  }, [accessToken, history])
 
   return (
     <Holder> 
