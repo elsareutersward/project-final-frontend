@@ -22,14 +22,16 @@ export const ConversationsList = () => {
   return (
     <ListHolder>
       <div>
-        <Heading>Selling</Heading>
+        { conversations.sellerConversations.length > 0 &&
+          <Heading>Selling</Heading> }
         {conversations.sellerConversations.map(conversation => 
             <ConversationCard {...conversation} key={conversation._id}/>
           )
         }
       </div>
       <div>
-        <Heading>Buying</Heading>
+        { conversations.buyerConversations.length > 0 &&
+          <Heading>Buying</Heading> }
         {conversations.buyerConversations.map(conversation => 
             <ConversationCard {...conversation} key={conversation._id}/>
           )

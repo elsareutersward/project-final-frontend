@@ -84,7 +84,7 @@ export const AdDetails = () => {
             </Text>
           </div>
         </TextHolder>
-        <BuyButton title={ad.title} adId={ad._Id} seller={ad.sellerId} />
+        <BuyButton title={ad.title} adId={ad.id} seller={ad.sellerId} />
       </InfoHolder>
     </DetailHolder>
   );

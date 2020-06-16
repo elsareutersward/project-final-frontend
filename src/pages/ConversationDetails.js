@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { BASE_URL } from '../App';
@@ -26,13 +27,30 @@ export const ConversationsDetails = () => {
   };
 
   return (
-    <section>
-      <h1>{conversation.info.name}</h1>
+    <Container>
+      <section>
+      <section>
+        <div>
+          <h1>{conversation.info.title}</h1>
+          <span>{conversation.info.price}</span>
+          <span>{conversation.info.location}</span>
+          <span>{conversation.info.delivery}</span>
+        </div>
+        <img src={conversation.info.image} alt='Image of product' />
+      </section>
       <MessageInput conversationId={_id} />
+      </section>
       {
         conversation.messages.map(message =>
         <MessageList {...message} key={message._id} />)
       }
-    </section>
+    </Container>
   );
 }
+
+const Container = styled.section`
+  display: flex;
+`;
+const AdInfo = styled.section`
+  
+`;

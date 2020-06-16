@@ -19,7 +19,7 @@ export const BuyButton = ({ title, adId, seller }) => {
     let myHeaders = new Headers();
     myHeaders.append('Authorization', accessToken)
     myHeaders.append('Content-Type', 'application/json')
-
+    
     fetch(BUY_URL, {
       method: 'POST',
       headers: myHeaders,
@@ -40,7 +40,7 @@ export const BuyButton = ({ title, adId, seller }) => {
 
   if (userId === seller) {
     return (
-        <Tooltip content={'Cannot send buy request on own product'} direction='under'>
+        <Tooltip content={'Cannot send buy request on own product, silly!'} direction='under'>
           <DarkButton 
             onClick={() => handleBuyRequest()}
             backgroundColor={'#62d2a2'}
