@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
  
-export const ConversationCard = ({ _id, name, sellerId, buyerId }) => {
+export const ConversationCard = ({ postId, name, otherUsersId }) => {
   return (
     <Container>
-      <Link to={`/conversations/${_id}`}>
+      <Link to={`/conversations/${postId}`}>
         <CardHolder>
           <TextBold>{name}</TextBold>
-          <Text>Seller: {sellerId}</Text>
-          <Text>Buyer: {buyerId}</Text>
+          <Text>{otherUsersId}</Text>
         </CardHolder>
       </Link>
     </Container>
@@ -17,7 +16,7 @@ export const ConversationCard = ({ _id, name, sellerId, buyerId }) => {
 }
 
 const Container = styled.section`
-  margin: 0px 30px;
+  margin: 0px 30px 20px 30px;
 
   a, :visited {
       text-decoration: none;

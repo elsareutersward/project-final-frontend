@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ConversationCard } from '../components/ConversationCard'
+import { ConversationCard } from '../components/ConversationCard';
 import { BASE_URL } from '../App';
 import { useSelector } from 'react-redux';
 
@@ -25,7 +25,12 @@ export const ConversationsList = () => {
         { conversations.sellerConversations.length > 0 &&
           <Heading>Selling</Heading> }
         {conversations.sellerConversations.map(conversation => 
-            <ConversationCard {...conversation} key={conversation._id}/>
+            <ConversationCard 
+              postId={conversation._id} 
+              name={conversation.name}
+              otherUsersId={`Buyer: ${conversation.sellerId}`}
+              key={conversation._id}
+            />
           )
         }
       </div>
@@ -33,7 +38,12 @@ export const ConversationsList = () => {
         { conversations.buyerConversations.length > 0 &&
           <Heading>Buying</Heading> }
         {conversations.buyerConversations.map(conversation => 
-            <ConversationCard {...conversation} key={conversation._id}/>
+            <ConversationCard 
+              postId={conversation._id} 
+              name={conversation.name}
+              otherUsersId={`Seller: ${conversation.sellerId}`}
+              key={conversation._id}
+            />
           )
         }
       </div>

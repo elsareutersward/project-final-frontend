@@ -14,7 +14,7 @@ export const StartPage = () => {
           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Text>
         <Link to='/posts'>
-          <DarkButton backgroundColor={'#62d2a2'}>
+          <DarkButton backgroundColor={'#40a798'}>
             START THRIFTING
           </DarkButton>
         </Link>

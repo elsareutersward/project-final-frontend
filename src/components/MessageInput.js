@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { BASE_URL } from '../App';
 import { ErrorMessage } from './ErrorMessage';
 import { useSelector } from 'react-redux';
+import { FormMessage } from '../lib/FormsInputs';
+import { TextAreaInput } from '../lib/FormsInputs';
+import { SignButton } from '../lib/Buttons';
 
 export const MessageInput = ({ conversationId }) => {
   const MESSAGES_URL = `${BASE_URL}/message`;
@@ -33,21 +37,27 @@ export const MessageInput = ({ conversationId }) => {
   }
 
   return (
-    <div className='form-container'>
-      <form onSubmit={handleSubmit} className='form'>
-        <textarea
-          placeholder='Type your thought here...'
-          className='form-text'
+    <section>
+      <FormMessage onSubmit={handleSubmit}>
+        <TextAreaInput
+          placeholder='Type your message here...'
           onChange={event => setMessage(event.target.value)}
         />
-        <div className={lengthCheck() ? 'validation-black' : 'validation-red'}>
+        <Validation color={lengthCheck() ? 'black' : 'red'}>
           {message.length}/140
-        </div>
+        </Validation>
         {error && <ErrorMessage />}
-        <button type='submit'>
-          <p>Send</p>
-        </button>
-      </form>
-    </div>
+        <SignButton  type='submit'>
+          Send
+        </SignButton>
+      </FormMessage>
+    </section>
   )
 }
+
+const Validation = styled.div`
+  color: ${props => props.color};
+  align-self: flex-end;
+  margin: 0px 10px;
+  font-size: 18px;
+`

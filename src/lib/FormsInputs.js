@@ -12,6 +12,15 @@ export const Form = styled.form`
   margin: 50px auto;
   border-radius: 20px;
 `;
+export const FormMessage = styled.form`
+  background-color: #f5e1da;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto;
+  padding: 10px 40px;
+`;
 export const TextInput = styled.input`
   background-color: ${props => props.backgroundColor};
   border: ${props => props.border};
