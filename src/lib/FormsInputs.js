@@ -20,6 +20,12 @@ export const FormMessage = styled.form`
   justify-content: center;
   margin: 30px auto;
   padding: 10px 40px;
+
+  @media (max-width: 426px) {
+    margin: 30px auto;
+    padding: 10px;
+    width: 100%;
+  }
 `;
 export const TextInput = styled.input`
   background-color: ${props => props.backgroundColor};
@@ -36,6 +42,11 @@ export const TextAreaInput = styled.textarea`
   border-bottom: #f1f1f1 5px solid;
   font-size: 20px;
   margin: 10px;
+
+  @media (max-width: 426px) {
+    width: 100%;
+    font-size: 18px;
+  }
 `;
 export const RadioInput = styled.input`
   font-size: 18px;

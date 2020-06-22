@@ -33,7 +33,7 @@ export const ConversationsDetails = () => {
 
   return (
     <Container>
-      <section>
+      <TopHolder>
       <AdInfo>
         <Image src={conversation.info.image} alt='Image of product' /> 
         <AdText>
@@ -44,7 +44,7 @@ export const ConversationsDetails = () => {
         </AdText>
       </AdInfo>
       <MessageInput conversationId={_id} />
-      </section>
+      </TopHolder>
       <MessageListHolder
         id="scrolldiv"
       >
@@ -61,30 +61,58 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   margin: 30px;
+
+  @media (max-width: 426px) {
+    flex-direction: column;
+    width: 80%;
+    margin: 30px auto;
+    align-items: center;
+  }
+`;
+const TopHolder = styled.section`
+  @media (max-width: 426px) {
+    margin: 0px;
+    width: 100%;
+  }
 `;
 const AdInfo = styled.section`
   display: flex; 
   flex-direction: row;
-`;
 
+  @media (max-width: 426px) {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+`;
 const Image = styled.img`
   width: 200px;
-`
+`;
 const AdText = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   margin-left: 20px;
   font-size: 20px;
-`
+
+  @media (max-width: 426px) {
+    flex-direction: column;
+    font-size: 18px;
+  }
+`;
 const Text = styled.span`
   font-weight: bold;
   padding: 10px 0px;
-`
+`;
 const MessageListHolder = styled.section`
   display: flex;
   flex-direction: column;
   margin-left: 100px;
-  height: 450px;
+  max-height: 450px;
   overflow-y: auto;
+
+  @media (max-width: 426px) {
+    margin: 0px 0px 240px 0px;
+    position: relative;
+  }
 `;

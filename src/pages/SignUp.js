@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signup } from '../reducers/user';
 import { Form, TextInput } from '../lib/FormsInputs';
@@ -8,6 +8,7 @@ import { SignButton } from '../lib/Buttons';
 export const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const errorMessage = useSelector((store) => store.user.login.errorMessage);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +16,10 @@ export const SignUp = () => {
   const handleSignup = (event) => {
     event.preventDefault();
     dispatch(signup(name, email, password));
-    history.push('/profile');
+    if (!errorMessage) {
+      history.push('/profile')
+      return;
+    }
     setName('');
     setEmail('');
     setPassword('');
@@ -24,6 +28,7 @@ export const SignUp = () => {
   return (
     <div> 
       <Form onSubmit={handleSignup} height={'300px'} width={'30%'} font={'24px'}>
+          {errorMessage ? <p>{errorMessage}</p> : null}
           <label>
             <TextInput
               border={'none'}

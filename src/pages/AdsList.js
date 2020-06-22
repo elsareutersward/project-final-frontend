@@ -9,8 +9,14 @@ export const AdsList = ({ ADS_URL }) => {
   
   useEffect(() => {
     fetch(ADS_URL)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error ('Unable to load content.');
+      })
       .then((json) => setAds(json))
+      .catch((err) => console.error(err))
   }, [ADS_URL]);
 
   return (
@@ -28,8 +34,10 @@ export const AdsList = ({ ADS_URL }) => {
         </label>
       </SortHolder>
       <CardHolder> 
-        {ads.map(ad => 
-          <AdCard {...ad} key={ad._id} />)
+        {ads.length < 1 ?
+          <Text>No posts created yet! Create a new post or start thrifting yourself!</Text>
+          :
+          ads.map(ad => <AdCard {...ad} key={ad._id} />)
         }
       </CardHolder>
     </section>
@@ -44,4 +52,14 @@ const CardHolder = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+
+  @media (max-width: 426px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
+const Text = styled.h1`
+  font-size: 24px;
+  color: #1fab89;
+  text-align: center;
+`

@@ -37,7 +37,7 @@ export const MessageInput = ({ conversationId }) => {
   }
 
   return (
-    <section>
+    <InputHolder>
       <FormMessage onSubmit={handleSubmit}>
         <TextAreaInput
           placeholder='Type your message here...'
@@ -51,13 +51,21 @@ export const MessageInput = ({ conversationId }) => {
           Send
         </SignButton>
       </FormMessage>
-    </section>
+    </InputHolder>
   )
 }
 
+const InputHolder = styled.section`
+  @media (max-width: 426px) {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+    width: 80%;
+  }
+`;
 const Validation = styled.div`
   color: ${props => props.color};
   align-self: flex-end;
   margin: 0px 10px;
   font-size: 18px;
-`
+`;

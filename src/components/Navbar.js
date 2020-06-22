@@ -6,7 +6,6 @@ import Tooltip from 'react-tooltip-lite';
 import '../lib/tooltip.css';
 import { logout } from '../reducers/user';
 import { SignIn } from '../components/SignIn';
-import { LightButton } from '../lib/Buttons';
 
 export const Navbar = () => {
   const dispatch = useDispatch();
@@ -25,7 +24,9 @@ export const Navbar = () => {
         <SiteName>
           <Link to='/'>THRIFTY</Link>
         </SiteName>
-        <Text>The thriftiness archive</Text>
+        <SubTitle>
+          <Link to='/'>The thriftiness archive</Link>
+        </SubTitle>
       </div>
       {!accessToken ? 
         <ContentHolder>
@@ -33,7 +34,7 @@ export const Navbar = () => {
             <Link to='/'>Home</Link>
           </Text>
           <Text>About</Text>
-          <Tooltip content={<SignIn />} direction='under'>
+          <Tooltip content={<SignIn />} eventToggle='onClick' direction='under'>
            <Text>Log in</Text>
           </Tooltip>
         </ContentHolder>
@@ -47,9 +48,7 @@ export const Navbar = () => {
             <Link to='/posts'>
               <Text>Thrift</Text>
             </Link>
-            <LightButton onClick={() => handleLogout()}>
-              Log out
-            </LightButton>
+            <Text onClick={() => handleLogout()}>Log out</Text>
           </ContentHolder>
         </LoggedInHolder>  
       }
@@ -62,7 +61,6 @@ const NavbarHolder = styled.section`
   color: #d7fbe8;
   height: 190px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -71,22 +69,61 @@ const NavbarHolder = styled.section`
     text-decoration: none;
     color: #d7fbe8;
   }
+
+  @media (max-width: 426px) {
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 const ContentHolder = styled.div`
   display: flex;
+
+  @media (max-width: 426px) {
+    justify-content: space-evenly;
+    width: 100%;
+  }
 `;
 const SiteName = styled.h1`
   font-size: 80px;
   margin: 0px 30px;
+
+  @media (max-width: 426px) {
+    font-size: 50px;
+  }
+`;
+const SubTitle = styled.h2`
+  font-size: 26px;
+  margin: 0px 30px;
+  cursor: pointer;
+  
+  @media (max-width: 426px) {
+    font-size: 20px;
+  }
 `;
 const Text = styled.h2`
   font-size: 26px;
   margin: 0px 30px;
+  cursor: pointer;
+  
+  @media (max-width: 426px) {
+    font-size: 20px;
+    margin: 0px 10px;
+  }
+
+  @media (max-width: 321px) {
+    font-size: 18px;
+  }
 `;
 const WelcomeText = styled.h2`
   font-size: 30px;
   font-weight: lighter;
   margin: 30px;
+
+  @media (max-width: 426px) {
+    font-size: 24px;
+    margin: 30px auto 10px auto;
+  }
 `;
 const LoggedInHolder = styled.section`
   height: 100%;
@@ -94,4 +131,9 @@ const LoggedInHolder = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+
+  @media (max-width: 426px) {
+    align-items: flex-start;
+    width: 100%;
+  }
 `

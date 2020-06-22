@@ -42,11 +42,11 @@ export const CreateAd = () => {
       body: formData,
     })
       .then((res) => {
-        if (res.ok) { return res.json }
+        if (res.ok) { return res.json() }
         throw new Error('Could not create ad. Please try again.');
       })
       .then((json) => {
-        swal("Great work!", "Your post was successfully created!", "success");
+        swal('Great work!', 'Your post was successfully created! Here is a preview of your post!', 'success');
         history.push(`/posts/${json._id}`);
       })
       .catch((err) => {
@@ -84,6 +84,7 @@ export const CreateAd = () => {
               backgroundColor={'#f1f1f1'}
               type='Number'
               placeholder='Price'
+              min="0"
               value={price}
               onChange={(event) => setPrice(event.target.value)}
               required
@@ -159,6 +160,8 @@ const Title = styled.h1`
 `;
 const FormContentHolder = styled.section`
   display: flex;
+
+  @media ()
 `;
 const SectionDevider = styled.div`
   display: flex;

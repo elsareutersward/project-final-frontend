@@ -28,9 +28,17 @@ const Holder = styled.section`
   display: flex;
   justify-content: space-around;
   color: #40a798;
+
+  @media (max-width: 426px) {
+    padding: 30px;
+  }
 `;
 const Image = styled.img`
   max-width: 40%;
+
+  @media (max-width: 426px) {
+    display: none;
+  }
 `;
 const TextHolder = styled.div`
   padding: 40px;
@@ -42,7 +50,15 @@ const Welcome= styled.h1`
   font-size: 40px;
   font-weight: bold;
   margin: 0px;
+
+  @media (max-width: 426px) {
+    font-size: 30px;
+  }
 `;
 const Text = styled.p`
   font-size: 30px;
+
+  @media (max-width: 426px) {
+    font-size: 20px;
+  }
 `

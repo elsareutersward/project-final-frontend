@@ -84,18 +84,31 @@ export const AdDetails = () => {
             </Text>
           </div>
         </TextHolder>
-        <BuyButton title={ad.title} adId={ad.id} seller={ad.sellerId} />
+        <BuyButton title={ad.title} adId={ad.id} sellerId={ad.sellerId} sellerName={ad.sellerName} />
       </InfoHolder>
     </DetailHolder>
   );
 }
 
 const DetailHolder = styled.section`
-  margin: 50px;
+  margin: 50px; 
   display: flex;
+
+  @media (max-width: 426px) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 30px 0px;
+  }
 `;
 const Image = styled.img`
   width: 500px;
+
+  @media (max-width: 426px) {
+    width: 80%;
+    margin-bottom: 20px;
+  }
 `;
 const TitleHolder = styled.section`
   display: flex;
@@ -110,20 +123,37 @@ const InfoHolder = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 426px) {
+    width: 80%;
+    padding: 20px;
+  }
 `;
 const Title = styled.h1`
   font-size: 30px;
   color: #1fab89;
   margin: 0px; 
+
+  @media (max-width: 426px) {
+    font-size: 26px;
+  }
 `;
 const SubTitles = styled.h2`
   font-size: 20px; 
   font-weight: bold;
   margin: 0px;
+
+  @media (max-width: 426px) {
+    font-size: 18px;
+  }
 `
 const Text = styled.p`
   font-size: 18px; 
   margin: 0px;
+
+  @media (max-width: 426px) {
+    font-size: 16px;
+  }
 `;
 const TextBold = styled.span`
   font-size: 18px; 
@@ -144,5 +174,10 @@ const TextHolder = styled.section`
     text-decoration: underline;
     color: #1fab89;
     cursor: pointer;
+  }
+
+  @media (max-width: 426px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;

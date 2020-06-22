@@ -77,7 +77,7 @@ export const signin = (email, password) => {
         if (res.ok) {
           return res.json();
         }
-        throw new Error ('Unable to sign in. Please check that your username and password are correct.');
+        throw new Error ('Unable to sign in. Please check your.');
       })
       .then((json) => {
           dispatch(user.actions.setAccessToken({accessToken: json.accessToken,}));
@@ -92,7 +92,7 @@ export const signin = (email, password) => {
   };
 };
 
-export const getUserInfo = () => {
+/* export const getUserInfo = () => {
   const USER_URL = `${BASE_URL}/users`;
   return (dispatch, getState) => {
     const accessToken = getState().user.login.accessToken;
@@ -114,7 +114,7 @@ export const getUserInfo = () => {
         dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
       });
   };
-};
+}; */
 
 export const logout = () => {
   return (dispatch) => {

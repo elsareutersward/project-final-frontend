@@ -22,6 +22,10 @@ const Holder = styled.section`
   border-top: 1.5px solid #62d2a2;
   width: 450px;
   overflow-wrap: anywhere;
+
+  @media (max-width: 426px) {
+    width: 100%;
+  }
 `;
 const SpanHolder = styled.div`
   display: flex; 

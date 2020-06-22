@@ -15,20 +15,39 @@ export const ConversationsList = () => {
     fetch(CONVERSATIONS_URL, {
       headers: {Authorization: accessToken}
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error ('Unable to load content.');
+      })
       .then((json) => setConversations(json))
+      .catch((err) => console.error(err))
   }, [CONVERSATIONS_URL, accessToken]);
 
   return (
     <ListHolder>
+      {conversations.sellerConversations.length < 1 
+        && conversations.buyerConversations.length < 1 
+        ?
+        <Heading>No thrifting processes in progress</Heading>
+        :
+        null
+      }
+      <Navigation>
+        <span id='top'>Go to:</span>
+        <a href='#selling'>Selling</a>
+        <a href='#buying'>Buying</a>
+      </Navigation>
       <div>
         { conversations.sellerConversations.length > 0 &&
-          <Heading>Selling</Heading> }
+          <Heading id='selling'>Selling</Heading> }
         {conversations.sellerConversations.map(conversation => 
             <ConversationCard 
               postId={conversation._id} 
               name={conversation.name}
-              otherUsersId={`Buyer: ${conversation.sellerId}`}
+              otherUsersId={`Buyer: ${conversation.buyerId.name}`}
+              image={conversation.adId.imageUrl}
               key={conversation._id}
             />
           )
@@ -36,17 +55,21 @@ export const ConversationsList = () => {
       </div>
       <div>
         { conversations.buyerConversations.length > 0 &&
-          <Heading>Buying</Heading> }
+          <Heading id='buying'>Buying</Heading> }
         {conversations.buyerConversations.map(conversation => 
             <ConversationCard 
               postId={conversation._id} 
               name={conversation.name}
-              otherUsersId={`Seller: ${conversation.sellerId}`}
+              otherUsersId={`Seller: ${conversation.sellerId.name}`}
+              image={conversation.adId.imageUrl}
               key={conversation._id}
             />
           )
         }
       </div>
+      <Navigation>
+        <a href='#top'> Go to top of page</a>
+      </Navigation>
     </ListHolder>
   );
 }
@@ -55,9 +78,28 @@ const ListHolder = styled.section`
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+
+  @media (max-width: 426px) {
+    flex-direction: column;
+  }
 `;
 const Heading = styled.h1`
   font-size: 24px;
   color: #1fab89;
   text-align: center;
 `;
+const Navigation = styled.div`
+  display: none;
+
+  a, &:visited  {
+    text-decoration: none;
+    color: #1fab89;
+    font-weight: bold;
+  }
+
+  @media (max-width: 426px) {
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto 0px 30px;
+  }
+`

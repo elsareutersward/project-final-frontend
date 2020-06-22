@@ -34,6 +34,10 @@ const CardContainer = styled.div`
     opacity: 100%;
     filter: grayscale(0%);
   }
+
+  @media (max-width: 426px) {
+    width: 80%;
+  }
 `;
 const Image = styled.img`
   width: 100%;

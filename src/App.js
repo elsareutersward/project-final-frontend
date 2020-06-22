@@ -12,7 +12,7 @@ import { AdsList } from './pages/AdsList';
 import { AdDetails } from './pages/AdDetails';
 import { SignUp } from './pages/SignUp';
 import { Profile } from './pages/Profile';
-import { Seller } from './pages/Seller';
+import { Seller } from './pages/AdsFromSeller';
 import { CreateAd } from './pages/CreateAd';
 import { ConversationsList } from './pages/ConversationsList';
 import { Footer } from './components/Footer';
@@ -24,7 +24,7 @@ const reducer = combineReducers({
   user: user.reducer
 })
 
-const persistedStateJSON = localStorage.getItem('UserState'); 
+const persistedStateJSON = sessionStorage.getItem('UserState'); 
 let persistedState = {};
 
 if (persistedStateJSON) {
@@ -36,7 +36,7 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, persistedState, composeEnhancer(applyMiddleware(thunk)))
 
 store.subscribe(() => {
-  localStorage.setItem('UserState', JSON.stringify(store.getState()));
+  sessionStorage.setItem('UserState', JSON.stringify(store.getState()));
 })
 
 export const App = () => {

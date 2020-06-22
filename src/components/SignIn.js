@@ -9,21 +9,17 @@ import { SignButton } from '../lib/Buttons'
 export const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const accessToken = useSelector((store) => store.user.login.accessToken);
+  const errorMessage = useSelector((store) => store.user.login.errorMessage);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignin = (event) => {
     event.preventDefault();
     dispatch(signin(email, password));
+    history.push('/profile')
     setEmail('');
     setPassword('');
   };
-
-  useEffect(() => {
-    console.log('hej', accessToken)
-    accessToken && history.push('/profile')
-  }, [accessToken, history])
 
   return (
     <Holder> 
@@ -51,6 +47,7 @@ export const SignIn = () => {
           <SignButton type='submit'>Sign in</SignButton>
         </label>
       </form>
+      {errorMessage ? <p>{errorMessage}</p> : null}
       <Text>New user?</Text>
       <Link to='/createaccount'>
         <SignButton>Create account</SignButton>

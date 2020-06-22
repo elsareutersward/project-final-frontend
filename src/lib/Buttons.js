@@ -18,6 +18,10 @@ export const SignButton = styled.button`
   &:hover {
     
   }
+
+  @media (max-width: 425px) {
+    font-size: 20px;
+  }
 `
 export const DarkButton = styled.button`
   background-color: ${props => props.backgroundColor};
