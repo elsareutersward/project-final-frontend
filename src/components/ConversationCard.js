@@ -13,7 +13,7 @@ export const ConversationCard = ({ postId, name, otherUsersId, image }) => {
       </Link>
     </Container>
   );
-}
+};
 
 const Container = styled.section`
   margin: 0px 30px 20px 30px;
@@ -22,7 +22,7 @@ const Container = styled.section`
       text-decoration: none;
       color: black;
     }
-`
+`;
 const CardHolder = styled.section`
   background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
               ${props => `url(${props.image}) no-repeat center`};
@@ -38,6 +38,9 @@ const CardHolder = styled.section`
                 ${props => `url(${props.image}) no-repeat center`};
   }
 
+  @media (max-width: 769px) {
+    width: 100%;
+  }
   @media (max-width: 426px) {
     width: 100%;
   }

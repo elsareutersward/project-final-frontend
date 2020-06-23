@@ -8,5 +8,5 @@ export const Chat = () => {
       <MessageInput />
       <MessageList />
     </div>
-  )
-}
+  );
+};

@@ -4,7 +4,7 @@ export const Holder = styled.section`
   padding: 40px;
   display: flex;
   justify-content: space-around;
-`
+`;
 export const SignButton = styled.button`
   background-color: #f1f1f1;
   border-radius: 8px;
@@ -22,7 +22,7 @@ export const SignButton = styled.button`
   @media (max-width: 425px) {
     font-size: 20px;
   }
-`
+`;
 export const DarkButton = styled.button`
   background-color: ${props => props.backgroundColor};
   border-radius: 10px;
@@ -36,7 +36,7 @@ export const DarkButton = styled.button`
   &:hover {
    
   }
-`
+`;
 export const LightButton = styled.button`
   background-color: #d7fbe8;
   border-radius: 10px;
@@ -50,7 +50,7 @@ export const LightButton = styled.button`
   &:hover {
     
   }
-`
+`;
 export const DeleteButton = styled.button`
   background-color: #e23e57;
   border-radius: 10px;
@@ -64,4 +64,4 @@ export const DeleteButton = styled.button`
   &:hover {
     
   }
-`
+`;

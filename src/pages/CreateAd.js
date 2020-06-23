@@ -157,18 +157,36 @@ export const CreateAd = () => {
 const Title = styled.h1`
   font-size: 30px;
   font-weight: lighter;
+
+  @media (max-width: 769px) {
+    font-size: 26px;
+    text-align: center;
+  }
 `;
 const FormContentHolder = styled.section`
   display: flex;
 
-  @media ()
+  @media (max-width: 769px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 const SectionDevider = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px;
+
+  @media (max-width: 769px) {
+    margin: 0px;
+    width: 100%;
+  }
 `;
 const Text = styled.label`
   margin-left: 10px;
   font-size: 20px;
+
+  @media (max-width: 769px) {
+    font-size: 18px;
+  }
 `;
+

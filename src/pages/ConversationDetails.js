@@ -16,10 +16,14 @@ export const ConversationsDetails = () => {
     fetch(CONVERSATION_URL, {
       headers: {Authorization: accessToken}
     })
-      .then(res => res.json())
-      .then(json => {
-        console.log(json)
-        setConversation(json)})
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error ('Unable to load content.');
+      })
+      .then((json) => setConversation(json))
+      .catch((err) => console.error(err));
   }, [CONVERSATION_URL, accessToken]);
 
   useEffect(() => {
@@ -55,7 +59,7 @@ export const ConversationsDetails = () => {
       </MessageListHolder>
     </Container>
   );
-}
+};
 
 const Container = styled.section`
   display: flex;
@@ -70,6 +74,10 @@ const Container = styled.section`
   }
 `;
 const TopHolder = styled.section`
+  @media (max-width: 769px) {
+    margin: 0px;
+    width: 50%;
+  }
   @media (max-width: 426px) {
     margin: 0px;
     width: 100%;
@@ -95,8 +103,7 @@ const AdText = styled.section`
   margin-left: 20px;
   font-size: 20px;
 
-  @media (max-width: 426px) {
-    flex-direction: column;
+  @media (max-width: 769px) {
     font-size: 18px;
   }
 `;
@@ -111,7 +118,12 @@ const MessageListHolder = styled.section`
   max-height: 450px;
   overflow-y: auto;
 
+  @media (max-width: 769px) {
+    margin-left: 20px;
+    width: 50%;
+  }
   @media (max-width: 426px) {
+    width: 100%;
     margin: 0px 0px 240px 0px;
     position: relative;
   }

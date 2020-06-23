@@ -12,11 +12,14 @@ export const Seller = () => {
 
   useEffect(() => {
     fetch(SELLER_URL)
-      .then(res => res.json())
-      .then(json => {
-        setSellerInfo(json)
-      })
-      
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error ('Unable to load content.');
+    })
+    .then((json) => setSellerInfo(json))
+    .catch((err) => console.error(err))
   }, [SELLER_URL, sellerId]);
 
   if(!sellerInfo) {
@@ -35,4 +38,4 @@ const Header = styled.h1`
   color: #1fab89;
   text-align: center;
   margin-top: 30px;
-`
+`;

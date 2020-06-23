@@ -16,7 +16,7 @@ export const AdCard = ({ _id, imageUrl, title, price, location, delivery }) => {
       </Link>
     </CardContainer>
   );
-}
+};
 
 const CardContainer = styled.div`
   width: 20%;
@@ -35,13 +35,16 @@ const CardContainer = styled.div`
     filter: grayscale(0%);
   }
 
+  @media (max-width: 769px) {
+    width: 40%;
+  }
   @media (max-width: 426px) {
     width: 80%;
   }
 `;
 const Image = styled.img`
   width: 100%;
-`
+`;
 const AdTitle = styled.h1`
   font-size: 20px;
   color: #1fab89;

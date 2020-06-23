@@ -11,6 +11,17 @@ export const Form = styled.form`
   width: ${props => props.width};
   margin: 50px auto;
   border-radius: 20px;
+
+  @media (max-width: 769px) {
+    margin: 30px auto;
+    padding: 10px;
+    width: 60%;
+  }
+  @media (max-width: 426px) {
+    margin: 30px auto;
+    padding: 10px;
+    width: 80%;
+  }
 `;
 export const FormMessage = styled.form`
   background-color: #f5e1da;
@@ -21,6 +32,9 @@ export const FormMessage = styled.form`
   margin: 30px auto;
   padding: 10px 40px;
 
+  @media (max-width: 769px) {
+    padding: 15px 15px 0px 15px;
+  }
   @media (max-width: 426px) {
     margin: 30px auto;
     padding: 10px;
@@ -33,6 +47,12 @@ export const TextInput = styled.input`
   border-bottom: ${props => props.borderBottom};
   font-size: 20px;
   margin: 10px;
+
+  @media (max-width: 426px) {
+    width: 100%;
+    margin: 10px 0px;
+    font-size: 18px;
+  }
 `;
 export const TextAreaInput = styled.textarea`
   background-color: #f1f1f1;
@@ -43,13 +63,19 @@ export const TextAreaInput = styled.textarea`
   font-size: 20px;
   margin: 10px;
 
+  @media (max-width: 769px) {
+    width: 100%;
+    font-size: 18px;
+    margin: 10px;
+  }
   @media (max-width: 426px) {
     width: 100%;
     font-size: 18px;
+    margin: 0px;
   }
 `;
 export const RadioInput = styled.input`
-  font-size: 18px;
+  font-size: 16px;
   margin: 5px 20px;
 `;
 export const Dropdown = styled.select`
@@ -58,4 +84,8 @@ export const Dropdown = styled.select`
   border: none;
   font-size: 20px;
   margin: 10px;
+
+  @media (max-width: 426px) {
+    font-size: 18px;
+  }
 `;

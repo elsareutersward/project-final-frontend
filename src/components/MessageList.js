@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 
-export const MessageList =({ message, name }) => {
+export const MessageList =({ message, name, createdAt }) => {
   return (
     <Holder>
       <p>{message}</p>
       <SpanHolder>
         <span>{name}</span>
-        <span>{moment(message.createdAt).fromNow()}</span>
+        <span>{moment(createdAt).fromNow()}</span>
       </SpanHolder>
     </Holder>
-  )
-}
+  );
+};
 
 const Holder = styled.section`
   background-color: #f1f1f1;
@@ -23,11 +23,11 @@ const Holder = styled.section`
   width: 450px;
   overflow-wrap: anywhere;
 
-  @media (max-width: 426px) {
+  @media (max-width: 769px) {
     width: 100%;
   }
 `;
 const SpanHolder = styled.div`
   display: flex; 
   justify-content: space-between;
-`
+`;

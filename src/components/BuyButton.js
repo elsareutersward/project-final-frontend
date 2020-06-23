@@ -17,8 +17,8 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
 
   const handleBuyRequest = () => {
     let myHeaders = new Headers();
-    myHeaders.append('Authorization', accessToken)
-    myHeaders.append('Content-Type', 'application/json')
+    myHeaders.append('Authorization', accessToken);
+    myHeaders.append('Content-Type', 'application/json');
     
     fetch(BUY_URL, {
       method: 'POST',
@@ -49,7 +49,7 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
             Send a buy request
           </DarkButton>
         </Tooltip>
-      )
+      );
   } else if (!userId) {
     return (
       <Tooltip content={'Log in or sign up to thrift!'} direction='under'>
@@ -61,7 +61,7 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
           Send a buy request
         </DarkButton>
       </Tooltip>
-    )
+    );
   } else {
     return (
       <DarkButton 
@@ -70,7 +70,7 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
         >
           Send a buy request
         </DarkButton>
-    )
-  }
-}
+    );
+  };
+};
 

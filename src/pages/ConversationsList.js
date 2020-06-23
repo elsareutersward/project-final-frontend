@@ -22,7 +22,7 @@ export const ConversationsList = () => {
         throw new Error ('Unable to load content.');
       })
       .then((json) => setConversations(json))
-      .catch((err) => console.error(err))
+      .catch((err) => console.error(err));
   }, [CONVERSATIONS_URL, accessToken]);
 
   return (
@@ -39,7 +39,7 @@ export const ConversationsList = () => {
         <a href='#selling'>Selling</a>
         <a href='#buying'>Buying</a>
       </Navigation>
-      <div>
+      <ListCardHolder>
         { conversations.sellerConversations.length > 0 &&
           <Heading id='selling'>Selling</Heading> }
         {conversations.sellerConversations.map(conversation => 
@@ -52,8 +52,8 @@ export const ConversationsList = () => {
             />
           )
         }
-      </div>
-      <div>
+      </ListCardHolder>
+      <ListCardHolder>
         { conversations.buyerConversations.length > 0 &&
           <Heading id='buying'>Buying</Heading> }
         {conversations.buyerConversations.map(conversation => 
@@ -66,13 +66,13 @@ export const ConversationsList = () => {
             />
           )
         }
-      </div>
+      </ListCardHolder>
       <Navigation>
         <a href='#top'> Go to top of page</a>
       </Navigation>
     </ListHolder>
   );
-}
+};
 
 const ListHolder = styled.section`
   display: flex;
@@ -81,6 +81,14 @@ const ListHolder = styled.section`
 
   @media (max-width: 426px) {
     flex-direction: column;
+  }
+`;
+const ListCardHolder = styled.section`
+  @media (max-width: 769px) {
+    width: 50%;
+  }
+  @media (max-width: 426px) {
+    width: 100%;
   }
 `;
 const Heading = styled.h1`
@@ -102,4 +110,4 @@ const Navigation = styled.div`
     flex-direction: column;
     margin: 30px auto 0px 30px;
   }
-`
+`;

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../reducers/user';
 import { TextInput } from '../lib/FormsInputs';
-import { SignButton } from '../lib/Buttons'
+import { SignButton } from '../lib/Buttons';
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const SignIn = () => {
   const handleSignin = (event) => {
     event.preventDefault();
     dispatch(signin(email, password));
-    history.push('/profile')
+    history.push('/profile');
     setEmail('');
     setPassword('');
   };

@@ -19,8 +19,14 @@ export const AdDetails = () => {
 
   useEffect(() => {
     fetch(AD_URL)
-      .then(res => res.json())
-      .then(json => setAd(json))
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error ('Unable to load content.');
+    })
+    .then((json) => setAd(json))
+    .catch((err) => console.error(err))
   }, [AD_URL, _id]);
 
   const handleDelete = () => {
@@ -88,13 +94,14 @@ export const AdDetails = () => {
       </InfoHolder>
     </DetailHolder>
   );
-}
+};
 
 const DetailHolder = styled.section`
   margin: 50px; 
   display: flex;
+  justify-content: center;
 
-  @media (max-width: 426px) {
+  @media (max-width: 769px) {
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -105,7 +112,7 @@ const DetailHolder = styled.section`
 const Image = styled.img`
   width: 500px;
 
-  @media (max-width: 426px) {
+  @media (max-width: 769px) {
     width: 80%;
     margin-bottom: 20px;
   }
@@ -114,9 +121,14 @@ const TitleHolder = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  @media (max-width: 769px) {
+    margin-bottom: 10px;
+  }
 `;
 const InfoHolder = styled.section`
   width: 100%;
+  max-width: 850px;
   background-color: #f1f1f1;
   margin: 0px 20px;
   padding: 30px;
@@ -124,7 +136,7 @@ const InfoHolder = styled.section`
   flex-direction: column;
   justify-content: space-between;
 
-  @media (max-width: 426px) {
+  @media (max-width: 769px) {
     width: 80%;
     padding: 20px;
   }
@@ -146,7 +158,7 @@ const SubTitles = styled.h2`
   @media (max-width: 426px) {
     font-size: 18px;
   }
-`
+`;
 const Text = styled.p`
   font-size: 18px; 
   margin: 0px;
@@ -176,6 +188,9 @@ const TextHolder = styled.section`
     cursor: pointer;
   }
 
+  @media (max-width: 769px) {
+    margin-bottom: 20px;
+  }
   @media (max-width: 426px) {
     flex-direction: column;
     align-items: flex-start;

@@ -8,13 +8,13 @@ import styled from 'styled-components';
 export const Profile = () => {
   const id = useSelector((store) => store.user.login.userId);
   const accessToken = useSelector((store) => store.user.login.accessToken);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     if (accessToken) {
-      setLoading(false)
-    }
-  })
+      setLoading(false);
+    };
+  }, [setLoading, accessToken]);
 
   return (
     <section>
@@ -48,6 +48,6 @@ const ProfileNavbar = styled.section`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 

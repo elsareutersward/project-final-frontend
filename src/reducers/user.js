@@ -92,30 +92,6 @@ export const signin = (email, password) => {
   };
 };
 
-/* export const getUserInfo = () => {
-  const USER_URL = `${BASE_URL}/users`;
-  return (dispatch, getState) => {
-    const accessToken = getState().user.login.accessToken;
-    const userId = getState().user.login.userID;
-    fetch(`${USER_URL}/${userId}`, {
-      method: 'GET', 
-      headers: { Authorization: accessToken },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json;
-        } 
-        throw new Error ('Could not get information. Make sure you are logged in and try again.');
-      })
-      .then((json) => {
-        dispatch()
-      })
-      .catch((err) => {
-        dispatch(user.actions.setErrorMessage({ errorMessage: err.message }));
-      });
-  };
-}; */
-
 export const logout = () => {
   return (dispatch) => {
     dispatch(user.actions.setErrorMessage({ errorMessage: null }));

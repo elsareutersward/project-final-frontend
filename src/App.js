@@ -17,27 +17,28 @@ import { CreateAd } from './pages/CreateAd';
 import { ConversationsList } from './pages/ConversationsList';
 import { Footer } from './components/Footer';
 import { ConversationsDetails } from './pages/ConversationDetails';
+import { About } from './pages/About';
 
-export const BASE_URL = 'http://localhost:8080'
+export const BASE_URL = 'http://localhost:8080';
 
 const reducer = combineReducers({
   user: user.reducer
-})
+});
 
 const persistedStateJSON = sessionStorage.getItem('UserState'); 
 let persistedState = {};
 
 if (persistedStateJSON) {
   persistedState = JSON.parse(persistedStateJSON);
-}
+};
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, persistedState, composeEnhancer(applyMiddleware(thunk)))
+const store = createStore(reducer, persistedState, composeEnhancer(applyMiddleware(thunk)));
 
 store.subscribe(() => {
   sessionStorage.setItem('UserState', JSON.stringify(store.getState()));
-})
+});
 
 export const App = () => {
   return (
@@ -48,6 +49,9 @@ export const App = () => {
           <Switch>
             <Route path='/' exact>
               <StartPage />
+            </Route>
+            <Route path='/about' exact>
+              <About />
             </Route>
             <Route path='/posts' exact>
               <AdsList ADS_URL={`${BASE_URL}/posts`} />
@@ -78,13 +82,13 @@ export const App = () => {
         </Main>
       </BrowserRouter>
     </Provider>
-  )
-}
+  );
+};
 
 const Main = styled.main`
   min-height: 100vh;
  overflow: hidden;
  display: block;
  position: relative;
- padding-bottom: 50px;
-`
+ padding-bottom: 60px;
+`;

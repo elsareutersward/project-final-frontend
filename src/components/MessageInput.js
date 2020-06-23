@@ -18,8 +18,8 @@ export const MessageInput = ({ conversationId }) => {
     event.preventDefault();
 
     let myHeaders = new Headers();
-    myHeaders.append('Authorization', accessToken)
-    myHeaders.append('Content-Type', 'application/json')
+    myHeaders.append('Authorization', accessToken);
+    myHeaders.append('Content-Type', 'application/json');
 
     fetch(MESSAGES_URL, 
       {
@@ -29,12 +29,12 @@ export const MessageInput = ({ conversationId }) => {
       })
     .then(response => {
       response.ok ? window.location.reload() : setError(true);
-    })
-  }
+    });
+  };
 
   const lengthCheck = () => {
-    return (message.length > 4 && message.length < 141)
-  }
+    return (message.length > 0 && message.length < 141);
+  };
 
   return (
     <InputHolder>
@@ -52,8 +52,8 @@ export const MessageInput = ({ conversationId }) => {
         </SignButton>
       </FormMessage>
     </InputHolder>
-  )
-}
+  );
+};
 
 const InputHolder = styled.section`
   @media (max-width: 426px) {
@@ -68,4 +68,8 @@ const Validation = styled.div`
   align-self: flex-end;
   margin: 0px 10px;
   font-size: 18px;
+
+  @media (max-width: 769px) {
+    font-size: 16px;
+  }
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { DarkButton } from '../lib/Buttons';
 
@@ -10,8 +10,8 @@ export const StartPage = () => {
       <TextHolder>
         <Welcome>WELCOME TO THRIFTY</Welcome>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Thrifty is a site for selling and buying second hand items looking for a new home!
+          Click the button below to start browsing, or log in to start selling and buying!
         </Text>
         <Link to='/posts'>
           <DarkButton backgroundColor={'#40a798'}>
@@ -21,7 +21,7 @@ export const StartPage = () => {
       </TextHolder>
     </Holder>
   );
-}
+};
 
 const Holder = styled.section`
   padding: 40px;
@@ -29,6 +29,10 @@ const Holder = styled.section`
   justify-content: space-around;
   color: #40a798;
 
+  @media (max-width: 769px) {
+    flex-direction: column;
+    align-items: center;
+  }
   @media (max-width: 426px) {
     padding: 30px;
   }
@@ -36,6 +40,9 @@ const Holder = styled.section`
 const Image = styled.img`
   max-width: 40%;
 
+  @media (max-width: 769px) {
+    max-width: 50%;
+  }
   @media (max-width: 426px) {
     display: none;
   }
@@ -51,14 +58,17 @@ const Welcome= styled.h1`
   font-weight: bold;
   margin: 0px;
 
-  @media (max-width: 426px) {
+  @media (max-width: 769px) {
     font-size: 30px;
   }
 `;
 const Text = styled.p`
   font-size: 30px;
 
+  @media (max-width: 769px) {
+    font-size: 24px;
+  }
   @media (max-width: 426px) {
     font-size: 20px;
   }
-`
+`;

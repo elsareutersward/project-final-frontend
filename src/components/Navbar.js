@@ -16,7 +16,7 @@ export const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     history.push('/');
-  }
+  };
 
   return (
     <NavbarHolder>
@@ -33,7 +33,9 @@ export const Navbar = () => {
           <Text>
             <Link to='/'>Home</Link>
           </Text>
-          <Text>About</Text>
+          <Text>
+            <Link to='/about'>About</Link>
+          </Text>
           <Tooltip content={<SignIn />} eventToggle='onClick' direction='under'>
            <Text>Log in</Text>
           </Tooltip>
@@ -53,8 +55,8 @@ export const Navbar = () => {
         </LoggedInHolder>  
       }
     </NavbarHolder>
-  )
-}
+  );
+};
 
 const NavbarHolder = styled.section`
   background-color: #62d2a2;
@@ -99,6 +101,7 @@ const SubTitle = styled.h2`
   
   @media (max-width: 426px) {
     font-size: 20px;
+    margin: 0px 30px 20px 30px;
   }
 `;
 const Text = styled.h2`
@@ -106,11 +109,13 @@ const Text = styled.h2`
   margin: 0px 30px;
   cursor: pointer;
   
-  @media (max-width: 426px) {
-    font-size: 20px;
+  @media (max-width: 769px) {
+    font-size: 23px;
     margin: 0px 10px;
   }
-
+  @media (max-width: 426px) {
+    font-size: 20px;
+  }
   @media (max-width: 321px) {
     font-size: 18px;
   }
@@ -120,9 +125,12 @@ const WelcomeText = styled.h2`
   font-weight: lighter;
   margin: 30px;
 
+  @media (max-width: 769px) {
+    font-size: 26px;
+    margin: 0px auto 10px auto;
+  }
   @media (max-width: 426px) {
     font-size: 24px;
-    margin: 30px auto 10px auto;
   }
 `;
 const LoggedInHolder = styled.section`
@@ -136,4 +144,4 @@ const LoggedInHolder = styled.section`
     align-items: flex-start;
     width: 100%;
   }
-`
+`;
