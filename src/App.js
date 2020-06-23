@@ -19,7 +19,7 @@ import { Footer } from './components/Footer';
 import { ConversationsDetails } from './pages/ConversationDetails';
 import { About } from './pages/About';
 
-export const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = 'https://er-final-project.herokuapp.com';
 
 const reducer = combineReducers({
   user: user.reducer
