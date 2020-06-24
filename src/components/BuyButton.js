@@ -44,6 +44,7 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
           <DarkButton 
             onClick={() => handleBuyRequest()}
             backgroundColor={'#62d2a2'}
+            backgroundColorHover={'#56c495'}
             disabled
           >
             Send a buy request
@@ -56,6 +57,7 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
         <DarkButton 
           onClick={() => handleBuyRequest()}
           backgroundColor={'#62d2a2'}
+          backgroundColorHover={'#56c495'}
           disabled
         >
           Send a buy request
@@ -67,6 +69,7 @@ export const BuyButton = ({ title, adId, sellerId, sellerName }) => {
       <DarkButton 
           onClick={() => handleBuyRequest()}
           backgroundColor={'#62d2a2'}
+          backgroundColorHover={'#56c495'}
         >
           Send a buy request
         </DarkButton>

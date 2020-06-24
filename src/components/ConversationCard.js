@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
  
-export const ConversationCard = ({ postId, name, otherUsersId, image }) => {
+export const ConversationCard = ({ postId, name, otherUsersId, image, date }) => {
   return (
     <Container>
       <Link to={`/conversations/${postId}`}>
         <CardHolder image={image}>
           <TextBold>{name}</TextBold>
-          <Text>{otherUsersId}</Text>
+          <Holder>
+            <Text>{otherUsersId}</Text>
+            <TextDate>Sent: {moment(date).fromNow()}</TextDate>
+          </Holder>
         </CardHolder>
       </Link>
     </Container>
@@ -47,11 +51,23 @@ const CardHolder = styled.section`
 `;
 const TextBold = styled.p`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0px 0px 1px white;
 `;
 const Text = styled.p`
   font-size: 18px;
   margin: 5px 0px;
+  font-weight: 600;
   text-shadow: 0px 0px 1px white;
+`;
+const TextDate = styled.p`
+  font-size: 16px;
+  margin: 5px 0px;
+  font-weight: 600;
+  text-shadow: 0px 0px 1px white;
+`;
+const Holder = styled.p`
+  display: flex; 
+  justify-content: space-between;
+  margin: 0px;
 `;

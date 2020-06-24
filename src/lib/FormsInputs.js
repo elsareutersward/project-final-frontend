@@ -61,6 +61,7 @@ export const TextAreaInput = styled.textarea`
   border: none;
   border-bottom: #f1f1f1 5px solid;
   font-size: 20px;
+  font-family: 'Open sans', sans-serif;
   margin: 10px;
 
   @media (max-width: 769px) {

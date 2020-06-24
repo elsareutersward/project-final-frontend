@@ -14,7 +14,10 @@ export const StartPage = () => {
           Click the button below to start browsing, or log in to start selling and buying!
         </Text>
         <Link to='/posts'>
-          <DarkButton backgroundColor={'#40a798'}>
+          <DarkButton 
+            backgroundColor={'#40a798'}
+            backgroundColorHover={'#399689'}
+          >
             START THRIFTING
           </DarkButton>
         </Link>

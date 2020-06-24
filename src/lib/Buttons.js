@@ -16,7 +16,7 @@ export const SignButton = styled.button`
   margin: 10px 5px;
   
   &:hover {
-    
+    background-color: lightgray;
   }
 
   @media (max-width: 425px) {
@@ -34,21 +34,7 @@ export const DarkButton = styled.button`
   width: 100%;
 
   &:hover {
-   
-  }
-`;
-export const LightButton = styled.button`
-  background-color: #d7fbe8;
-  border-radius: 10px;
-  border: none;
-  padding: 10px 15px;
-  margin: 0px 30px;
-  color: #62d2a2;
-  font-size: 26px;
-  cursor: pointer;
-
-  &:hover {
-    
+    background-color: ${props => props.backgroundColorHover};
   }
 `;
 export const DeleteButton = styled.button`
@@ -62,6 +48,6 @@ export const DeleteButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    
+    background-color: #e31231;
   }
 `;

@@ -48,6 +48,7 @@ export const ConversationsList = () => {
               name={conversation.name}
               otherUsersId={`Buyer: ${conversation.buyerId.name}`}
               image={conversation.adId.imageUrl}
+              date={conversation.createdAt}
               key={conversation._id}
             />
           )
@@ -62,6 +63,7 @@ export const ConversationsList = () => {
               name={conversation.name}
               otherUsersId={`Seller: ${conversation.sellerId.name}`}
               image={conversation.adId.imageUrl}
+              date={conversation.createdAt}
               key={conversation._id}
             />
           )
